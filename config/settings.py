@@ -1,7 +1,6 @@
 from pathlib import Path
 import os
-from celery import Celery
-from decouple import config, Config
+from decouple import config
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent

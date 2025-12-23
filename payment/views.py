@@ -9,9 +9,9 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
 import yookassa
-from .models import Payment
-from orders.models import Order
 from yookassa import Configuration, Payment as YooPayment
+from orders.models import Order
+from .models import Payment
 
 Configuration.configure(settings.YOOKASSA_SHOP_ID, settings.YOOKASSA_SECRET_KEY)
 Configuration.test_mode = settings.YOOKASSA_TEST_MODE
