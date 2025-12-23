@@ -1,0 +1,16 @@
+{% extends 'includes/base.html' %}
+
+{% block content %}
+<html>
+<head><title>Мои заказы</title></head>
+<body>
+<h1>История заказов</h1>
+{% for order in orders %}
+<p><a href="{% url 'orders:order_detail' order.id %}">Заказ #{{ order.id }} - {{ order.total_price }} руб. ({{
+    order.get_status_display }})</a></p>
+{% empty %}
+<p>Заказов нет.</p>
+{% endfor %}
+</body>
+</html>
+{% endblock %}

@@ -1,0 +1,69 @@
+{% extends 'includes/base.html' %}
+{% load static %}
+{% block title %}
+{% endblock %}
+{% block content %}
+
+<div class="cart">
+    {% with total_items=cart|length %}
+    {% if cart|length > 0 %}
+    Ваша корзина:
+    <a href="{% url " cart:cart" %}">
+    </a>
+    {% else %}
+    Ваша корзина пуста.
+    {% endif %}
+    {% endwith %}
+</div>
+{% if cart|length > 0 %}
+<table class="cart">
+    <thead>
+    <tr>
+        <th>Товар</th>
+        <th>Вид</th>
+        <th>Количество</th>
+        <th>Цена за шт</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for item in cart %}
+    <tr>
+        <td>{{ item.product.name }}</td>
+        <td>
+            <a href="{{ item.product.get_absolute_url }}">
+                <img src="{% if item.product.image %}{{ item.product.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}"
+                     alt="{{ item.product.name }}">
+            </a>
+        </td>
+
+        <td>
+
+            <form action="{% url 'cart:update_cart' item.product.pk %}" method="post" style="display: inline;">
+                {% csrf_token %}
+                <input type="number" name="quantity" value="{{ item.quantity }}" min="1" style="width: 60px;">
+                <button type="submit" class="btn btn-warning">Обновить</button>
+            </form>
+
+        </td>
+        <td class="num">{{ item.price }}</td>
+        <td>
+            <form method="post" action="{% url 'cart:remove_from_cart' item.product.pk %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-warning">Удалить</button>
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+    <tr class="total">
+        <td>Итого</td>
+        <td colspan="5"></td>
+        <td class="num">{{ cart.get_total_price }}</td>
+    </tr>
+    </tbody>
+</table>
+<div class="d-grid gap-2 col-6 mx-auto">
+    <a href="{% url 'orders:create_order' %}" class="btn btn-outline-warning btn-lg" role="button">Оформить заказ</a>
+</div>
+</p>
+{% endif %}
+{% endblock %}

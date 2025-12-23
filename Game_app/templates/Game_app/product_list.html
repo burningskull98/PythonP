@@ -1,0 +1,64 @@
+{% extends 'includes/base.html' %}
+{% load static %}
+{% block content %}
+<h2 style="color: orange;">Список товаров</h2>
+
+<form method="get" class="mb-4" id="filter-form">
+    {{ filter_form.category }}
+    <div class="row mb-3">
+        <div class="col">
+            <label for="min_price" class="form-label">Цена от:</label>
+            <input type="number" name="min_price" id="min_price" class="form-control form-control-sm"
+                   placeholder="Введите цену от" step="0.01">
+        </div>
+        <div class="col">
+            <label for="max_price" class="form-label">Цена до:</label>
+            <input type="number" name="max_price" id="max_price" class="form-control form-control-sm"
+                   placeholder="Введите цену до" step="0.01">
+        </div>
+    </div>
+    <button type="submit" class="btn btn-outline-warning">Применить фильтр</button>
+</form>
+
+<div class="products-container">
+    {% for product in products %}
+    <div class="product-card mb-4">
+        <h3 style="color: #6610f2;">{{ product.name }}</h3>
+        <div class="col-md-4">
+            <img src="{{ product.image.url }}" alt="{{ product.name }}" class="img-thumbnail">
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Цена: {{ product.price }} руб.</h5>
+                <p>Категория: {{ product.category.name }}</p>
+                <p>Рейтинг: {{ product.rating }}/10</p>
+                <a href="{% url 'Game_app:product_detail' product.pk %}" class="btn btn-warning">Подробнее</a>
+                <form method="post" action="{% url 'cart:add_to_cart' product.pk %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-outline-warning">Добавить в корзину</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% if is_paginated %}
+<div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; первая</a>
+            <a href="?page={{ page_obj.previous_page_number }}">предыдущая</a>
+        {% endif %}
+
+        <span class="current">
+            Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">следующая</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">последняя &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+{% endif %}
+{% endblock %}

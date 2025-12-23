@@ -1,0 +1,18 @@
+{% extends 'includes/base.html' %}
+{% block content %}
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Вход</title>
+</head>
+<body>
+<h1>Вход в аккаунт</h1>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-warning">Войти</button>
+</form>
+<p>Нет аккаунта? <a class="btn btn-outline-warning" href="{% url 'accounts:registration' %}">Зарегистрироваться</a></p>
+</body>
+</html>
+{% endblock %}

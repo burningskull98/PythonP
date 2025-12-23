@@ -1,0 +1,26 @@
+{% extends 'includes/base.html' %}
+{% block content %}
+<div class="container mt-5">
+    <div class="card mb-4 custom-shadow">
+        <div class="row">
+            <div class="col-md-4">
+                <img src="{{ product.image.url }}"
+                     class="img-thumbnail" data-bs-toggle="modal" data-bs-target="#imageModal1">
+            </div>
+        </div>
+        <div class="card-body">
+            <h2>Название:{{ product.name }}</h2>
+            <p>Описание:{{ product.description }}</p>
+            <p>Цена: {{ product.price }} руб.</p>
+            <p>Характеристика: {{ product.characteristic }} </p>
+            <p>Рейтинг: {{ product.rating }}</p>
+            <p>Категория: {{ product.category.name }}</p>
+            <form method="post" action="{% url 'cart:add_to_cart' product.pk %}">
+                {% csrf_token %}
+                {{ cart_add_form.quantity }}
+                <button type="submit" class="btn btn-outline-warning">Добавить в корзину</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

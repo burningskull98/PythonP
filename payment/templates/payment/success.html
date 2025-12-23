@@ -1,0 +1,30 @@
+{% extends 'includes/base.html' %}
+
+{% block content %}
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Оплата успешна</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin: 50px; }
+        .success { color: green; font-size: 24px; }
+        .details { margin: 20px 0; }
+        a { color: #007BFF; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+<h1 class="success">Оплата прошла успешно!</h1>
+<div class="details">
+    <p>Спасибо за покупку. Ваш заказ обработан.</p>
+    <p>ID платежа: <strong>{{ payment_id }}</strong></p>
+    <p>Сумма: <strong>{{ amount }} руб.</strong></p>
+    <p>Дата: <strong>{{ date }}</strong></p>
+    <p>Заказ: <strong>#{{ order.id }}</strong></p>
+</div>
+<p><a href="{% url 'orders:order_list' %}">Вернуться на сайт</a></p>
+<p>Если у вас есть вопросы, свяжитесь с поддержкой.</p>
+</body>
+</html>
+{% endblock %}

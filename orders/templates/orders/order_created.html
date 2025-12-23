@@ -1,0 +1,47 @@
+{% extends 'includes/base.html' %}
+{% load static %}
+
+{% block content %}
+<h1>Заказ успешно создан!</h1>
+<p>Спасибо за ваш заказ. Ниже приведены детали:</p>
+
+<div class="order-details">
+    <h2>Информация о заказе</h2>
+    <p><strong>Номер заказа:</strong> {{ order.id }}</p>
+    <p><strong>Дата создания:</strong> {{ order.created_at|date:"d.m.Y H:i" }}</p>
+    <p><strong>Статус:</strong> {{ order.get_status_display }}</p>
+    <p><strong>Общая стоимость:</strong> {{ order.total_price }} руб.</p>
+    {% if order.delivery_address %}
+    <p><strong>Адрес доставки:</strong> {{ order.delivery_address }}</p>
+    {% endif %}
+    {% if order.phone %}
+    <p><strong>Телефон:</strong> {{ order.phone }}</p>
+    {% endif %}
+</div>
+
+<h2>Товары в заказе</h2>
+<table class="order-items">
+    <thead>
+    <tr>
+        <th>Название товара</th>
+        <th>Количество</th>
+        <th>Цена за шт</th>
+        <th>Итого</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for item in order.orderitem_set.all %}
+    <tr>
+        <td>{{ item.product.name }}</td>
+        <td>{{ item.quantity }}</td>
+        <td>{{ item.price }} руб.</td>
+        <td>{{ item.get_cost }} руб.</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+{% if order.status == 'pending' %}
+<p><a href="{% url 'payment:create_payment' %}?order_id={{ order.id }}">Оплатить заказ онлайн</a></p>
+{% endif %}
+{% endblock %}

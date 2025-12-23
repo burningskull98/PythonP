@@ -1,0 +1,64 @@
+{% extends 'includes/base.html' %}
+
+{% block content %}
+<html>
+<head><title>Создать заказ</title></head>
+<body>
+<h1>Оформление заказа</h1>
+<form method="post">
+    {% csrf_token %}
+
+    <h4>Контактная информация</h4>
+    <div>
+        <label for="name">Имя:</label>
+        <input type="text" name="name" id="name" required>
+    </div>
+    <div>
+        <label for="surname">Фамилия:</label>
+        <input type="text" name="surname" id="surname" required>
+    </div>
+    <div>
+        <label for="email">Электронная почта:</label>
+        <input type="email" name="email" id="email" required>
+    </div>
+    <div>
+        <label for="phone">Номер телефона:</label>
+        <input type="tel" name="phone" id="phone" required>
+    </div>
+
+    <h4>Способ доставки</h4>
+    <div>
+        <label for="delivery_method">Выберите способ доставки:</label>
+        <select name="delivery_method" id="delivery_method" required>
+            <option value="courier">Курьером</option>
+            <option value="courier">СДЭК</option>
+            <option value="pickup">Самовывоз</option>
+        </select>
+    </div>
+
+    <h4>Способ оплаты</h4>
+    <div>
+        <label for="payment_method">Выберите способ оплаты:</label>
+        <select name="payment_method" id="payment_method" required>
+            <option value="card">Картой курьеру</option>
+            <option value="cash">Наличными</option>
+            <option value="online">Оплата картой на сайте</option>
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-warning">Создать заказ</button>
+</form>
+
+<h2>Ваша корзина</h2>
+{% for item in cart %}
+<p>{{ item.product.name }} x {{ item.quantity }} = {{ item.total_price }}</p>
+{% endfor %}
+
+<div class="total">
+    <h3>Итого</h3>
+    <p>{{ cart.get_total_price }}</p>
+</div>
+</body>
+</html>
+{% endblock %}
+

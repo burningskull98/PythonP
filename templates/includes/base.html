@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/styles.css' %}">
+<html lang="ru" data-bs-theme="dark">
+<head>
+    <title>Интернет-магазин</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .bg-indigo-400 {
+            background-color: #6610f2 !important;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-indigo-400">
+    <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{% url 'Game_app:products' %}">Каталог</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'accounts:profile' %}">Личный кабинет</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'accounts:login' %}">Войти</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'cart:cart' %}">Корзина</a>
+                </li>
+
+                <form method="get" action="{% url 'Game_app:search_results' %}" class="d-flex ms-3">
+                    <input type="text" name="query" placeholder="Поиск игр..." class="form-control me-2">
+                    <button type="submit" class="btn btn-warning">Найти</button>
+                </form>
+        </div>
+    </div>
+</nav>
+<div class="container">
+    {% block content %}{% endblock %}
+</div>
+<footer class="bg-dark text-white py-3">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h5>Информация</h5>
+                <ul class="list-unstyled">
+                    <li><a href="{% url 'Game_app:about_us' %}">О нас</a></li>
+                    <li><a href="{% url 'Game_app:products' %}">Каталог</a></li>
+                </ul>
+            </div>
+            <div class="col-md-6">
+                <h5>Клиентам</h5>
+                <ul class="list-unstyled">
+                    <li><a href="{% url 'Game_app:contacts' %}">Контакты</a></li>
+                    <li><a href="{% url 'Game_app:terms_of_return' %}">Условия возврата</a></li>
+                    <li><a href="{% url 'Game_app:delivery' %}">Доставка</a></li>
+                </ul>
+            </div>
+        </div>
+        <p class="text-center">© 2025 Любое использование контента без письменного разрешения запрещено</p>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,95 @@
+volumes:
+  static:
+  db-data:
+  redis-data:
+
+services:
+  db:
+    image: postgres:15
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: "${POSTGRES_USER}"
+      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD}"
+      POSTGRES_DB: "${POSTGRES_DB}"
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:latest
+    volumes:
+      - redis-data:/data
+    healthcheck:
+      test: [ "CMD", "redis-cli", "ping" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: .
+    volumes:
+      - .:/app/PythonProject  # Добавлено: монтируем код в WORKDIR
+      - static:/app/static/
+    environment:
+      PGDB: "${POSTGRES_DB}"
+      PGUSER: "${POSTGRES_USER}"
+      PGPASSWORD: "${POSTGRES_PASSWORD}"
+      SECRET_KEY: "${SECRET_KEY}"
+      EMAIL_HOST_PASSWORD: "${EMAIL_HOST_PASSWORD}"
+      CELERY_BROKER_URL: "redis://redis:6379/0"
+      CELERY_RESULT_BACKEND: "redis://redis:6379/0"
+    command:
+      - bash
+      - -c
+      - |
+        set -e  # Exit on any error
+        echo "Starting migrations..."
+        python manage.py migrate --settings=config.settings
+        echo "Collecting static files..."
+        python manage.py collectstatic --noinput --settings=config.settings
+        echo "Starting Gunicorn..."
+        exec gunicorn config.wsgi -b 0.0.0.0:8080 --workers 2 --timeout 120  # Use 'exec' to replace bash, ensuring signals are handled
+
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  celery:
+    build:
+      context: .
+    volumes:
+      - .:/app/PythonProject  # Изменено: синхронизировано с WORKDIR
+    environment:
+      PGDB: "${POSTGRES_DB}"
+      PGUSER: "${POSTGRES_USER}"
+      PGPASSWORD: "${POSTGRES_PASSWORD}"
+      SECRET_KEY: "${SECRET_KEY}"
+      EMAIL_HOST_PASSWORD: "${EMAIL_HOST_PASSWORD}"
+      CELERY_BROKER_URL: "redis://redis:6379/0"
+      CELERY_RESULT_BACKEND: "redis://redis:6379/0"
+      DJANGO_SETTINGS_MODULE: "config.settings"  # Добавлено: явно указываем модуль
+    command: celery -A config worker -l info -P gevent
+    depends_on:
+      redis:
+        condition: service_healthy
+      db:
+        condition: service_healthy
+
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+    volumes:
+      - static:/usr/share/nginx/html/static
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - /d/Виктория/Курс.Часть2/ДЗ/PythonProject/media:/usr/share/nginx/html/media
+      - /d/Виктория/Курс.Часть2/ДЗ/PythonProject/media:/usr/share/nginx/html/media
+    depends_on:
+      - backend
+

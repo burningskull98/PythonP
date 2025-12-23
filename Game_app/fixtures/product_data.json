@@ -1,0 +1,261 @@
+[
+  {
+    "model": "Game_app.category",
+    "pk": 1,
+    "fields": {
+      "category_id": 1,
+      "name": "PK",
+      "description": "Game for PK"
+    }
+  },
+  {
+    "model": "Game_app.category",
+    "pk": 2,
+    "fields": {
+      "category_id": 2,
+      "name": "PlayStation 5",
+      "description": "Game for Sony PlayStation 5"
+    }
+  },
+  {
+    "model": "Game_app.category",
+    "pk": 3,
+    "fields": {
+      "category_id": 3,
+      "name": "PlayStation 4",
+      "description": "Game for Sony PlayStation 4"
+    }
+  },
+  {
+    "model": "Game_app.product",
+    "pk": 4,
+    "fields": {
+      "product_id": 1,
+      "name": "Atomic Heart",
+      "image": "product_im/AtomicH.jpg",
+      "description": "",
+      "characteristic": "Тип товара: Игры для Playstation 5 \nСоздатель: Mundfish,\nГод выхода:2023, \nЖанр:Action/RPG",
+      "price": 3000,
+      "rating": 4,
+      "created_at": "2025-06-02T12:00:00Z",
+      "category": 2
+    }
+  },
+  {
+    "model": "Game_app.product",
+    "pk": 5,
+    "fields": {
+      "product_id": 2,
+      "name": "Ghost of Tsushima",
+      "image": "product_im/ps5_ghost_eu_dir.png",
+      "description": "",
+      "characteristic": "Тип товара: Игры для Playstation 5 \nСоздатель: Sucker Punch Productions,\nГод выхода:2020,\nЖанр:Action-adventure",
+      "price": 4500,
+      "rating": 5,
+      "created_at": "2025-06-03T12:00:00Z",
+      "category": 2
+    }
+  },
+  {
+    "model": "Game_app.product",
+    "pk": 6,
+    "fields": {
+      "product_id": 3,
+      "name": "EA Sports FC 25 (FIFA 25)",
+      "image": "product_im/EAFC25ps5.png",
+      "description": "",
+      "characteristic": "Тип товара: Игры для Playstation 5 \nСоздатель: EA Vancouver и EA Romania, \nГод выхода:2024,\nЖанр:Sports",
+      "price": 3990,
+      "rating": 5,
+      "created_at": "2025-06-07T12:00:00Z",
+      "category": 2
+    }
+  },
+  {
+    "model": "Game_app.product",
+    "pk": 7,
+    "fields": {
+      "product_id": 4,
+      "name": "God of War Ragnarok",
+      "image": "product_im/godragnorokps5.gif",
+      "description": "",
+      "characteristic": "Тип товара: Игры для Playstation 5 \nСоздатель: Santa Monica Studio,\nГод выхода:2022, \nЖанр:Action/RPG",
+      "price": 3000,
+      "rating": 5,
+      "created_at": "2025-06-12T12:00:00Z",
+      "category": 2
+    }
+  },
+  {
+    "model": "Game_app.product",
+    "pk": 8,
+    "fields": {
+      "product_id": 5,
+      "name": "Detroit: Become Human",
+      "image": "product_im/ps4_detroidbechumrus.gif",
+      "description": "",
+      "characteristic": "Тип товара: Игры для Playstation 5 \nСоздатель: Quantic Dream,\nГод выхода:2018, \nЖанр:Action-adventure",
+      "price": 3500,
+      "rating": 4,
+      "created_at": "2025-06-22T12:00:00Z",
+      "category": 2
+    }
+  },
+  {
+    "model": "Game_app.product",
+    "pk": 9,
+    "fields": {
+      "product_id": 6,
+      "name": "Cyberpunk 2077",
+      "image": "product_im/Cyberpunk_2077_ranking.png",
+      "description": "",
+      "characteristic": "Тип товара: Игры для PK \nСоздатель: CD Projekt, \nГод выхода:2020, \nЖанр:Action/RPG",
+      "price": 1500,
+      "rating": 4,
+      "created_at": "2025-06-19T12:00:00Z",
+      "category": 1
+    }
+  },
+  {
+    "model": "Game_app.product",
+    "pk": 10,
+    "fields": {
+      "product_id": 7,
+      "name": "The Witcher 3: Wild Hun",
+      "image": "product_im/witcher.jpg",
+      "description": "",
+      "characteristic": "Тип товара: Игры для PK \nСоздатель: CD Projekt RED, \nГод выхода:2015, \nЖанр:Action/RPG",
+      "price": 2000,
+      "rating": 5,
+      "created_at": "2025-06-30T12:00:00Z",
+      "category": 1
+    }
+  },
+  {
+    "model": "Game_app.product",
+    "pk": 11,
+    "fields": {
+      "product_id": 8,
+      "name": "ELDEN RING",
+      "image": "product_im/elden ring.jpg",
+      "description": "",
+      "characteristic": "Тип товара: Игры для PK \nСоздатель: FromSoftware, \nГод выхода:2015, \nЖанр:Action/RPG",
+      "price": 2500,
+      "rating": 5,
+      "created_at": "2025-06-24T12:00:00Z",
+      "category": 1
+    }
+  },
+  {
+    "model": "Game_app.product",
+    "pk": 12,
+    "fields": {
+      "product_id": 9,
+      "name": "Grand Theft Auto: San Andreas",
+      "image": "product_im/san-andreas-hd-png.png",
+      "description": "",
+      "characteristic": "Тип товара: Игры для PK \nСоздатель: Rockstar North, \nГод выхода:2004, \nЖанр:Action-adventure",
+      "price": 1000,
+      "rating": 5,
+      "created_at": "2025-06-18T12:00:00Z",
+      "category": 1
+    }
+  },
+  {
+    "model": "Game_app.product",
+    "pk": 13,
+    "fields": {
+      "product_id": 10,
+      "name": "Red Dead Redemption 2",
+      "image": "product_im/red dead.jpg",
+      "description": "",
+      "characteristic": "Тип товара: Игры для PK \nСоздатель: Rockstar Studios, \nГод выхода:2018, \nЖанр:Action-adventure",
+      "price": 2000,
+      "rating": 5,
+      "created_at": "2025-06-17T12:00:00Z",
+      "category": 1
+    }
+  },
+  {
+    "model": "Game_app.product",
+    "pk": 14,
+    "fields": {
+      "product_id": 11,
+      "name": " 7 Days To Die",
+      "image": "product_im/7_days_to_die_game_for_ps4_detail.jpg",
+      "description": "",
+      "characteristic": "Тип товара: Игры для Playstation 4 \nСоздатель: The Fun Pimps Entertainment,\nГод выхода:2016, \nЖанр:survival horror",
+      "price": 2500,
+      "rating": 5,
+      "created_at": "2025-06-13T12:00:00Z",
+      "category": 3
+    }
+  },
+  {
+    "model": "Game_app.product",
+    "pk": 15,
+    "fields": {
+      "product_id": 12,
+      "name": " Alien: Isolation",
+      "image": "product_im/6012760917.jpg",
+      "description": "",
+      "characteristic": "Тип товара: Игры для Playstation 4 \nСоздатель: Creative Assembly,\nГод выхода:2014, \nЖанр:survival horror",
+      "price": 1400,
+      "rating": 5,
+      "created_at": "2025-06-10T12:00:00Z",
+      "category": 3
+    }
+  },
+  {
+    "model": "Game_app.product",
+    "pk": 16,
+    "fields": {
+      "product_id": 13,
+      "name": "Hellblade: Senua’s Sacrifice",
+      "image": "product_im/s-l1600.jpg",
+      "description": "",
+      "characteristic": "Тип товара: Игры для Playstation 4 \nСоздатель: Ninja Theory ,\nГод выхода:2017, \nЖанр:action-adventure",
+      "price": 1800,
+      "rating": 5,
+      "created_at": "2025-06-25T12:00:00Z",
+      "category": 3
+    }
+  },
+  {
+    "model": "Game_app.product",
+    "pk": 17,
+    "fields": {
+      "product_id": 14,
+      "name": "Assassin’s Creed Odyssey",
+      "image": "product_im/630349_r3762.jpg",
+      "description": "",
+      "characteristic": "Тип товара: Игры для Playstation 4 \nСоздатель: Ubisoft Quebec ,\nГод выхода:2018, \nЖанр:action-adventure",
+      "price": 3000,
+      "rating": 5,
+      "created_at": "2025-06-19T12:00:00Z",
+      "category": 3
+    }
+  },
+  {
+    "model": "Game_app.product",
+    "pk": 18,
+    "fields": {
+      "product_id": 15,
+      "name": "Batman: Arkham Knight",
+      "image": "product_im/7013836028.jpg",
+      "description": "",
+      "characteristic": "Тип товара: Игры для Playstation 4 \nСоздатель: Rocksteady Studios ,\nГод выхода:2015, \nЖанр:action-adventure",
+      "price": 2000,
+      "rating": 5,
+      "created_at": "2025-06-17T12:00:00Z",
+      "category": 3
+    }
+  }
+]
+
+
+
+
+
+
+
