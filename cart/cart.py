@@ -21,7 +21,7 @@ class Cart:
 
         for pid in product_ids:
             try:
-                if pid:  # Проверяем, что pid не пустой
+                if pid:  
                     product_ids_int.append(int(pid))
             except ValueError:
                 continue
@@ -29,7 +29,7 @@ class Cart:
         products = Product.objects.filter(pk__in=product_ids_int)
         for product in products:
             item = self.cart[str(product.pk)]
-            item_copy = item.copy()  # Создаем копию, чтобы не изменять self.cart
+            item_copy = item.copy()  
             item_copy["product"] = product
             item_copy["price"] = Decimal(item["price"])
             item_copy["total_price"] = item_copy["price"] * item["quantity"]
