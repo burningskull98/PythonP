@@ -32,7 +32,7 @@ services:
     build:
       context: .
     volumes:
-      - .:/app/PythonProject  # Добавлено: монтируем код в WORKDIR
+      - .:/app/PythonProject  
       - static:/app/static/
     environment:
       PGDB: "${POSTGRES_DB}"
@@ -46,13 +46,13 @@ services:
       - bash
       - -c
       - |
-        set -e  # Exit on any error
+        set -e  
         echo "Starting migrations..."
         python manage.py migrate --settings=config.settings
         echo "Collecting static files..."
         python manage.py collectstatic --noinput --settings=config.settings
         echo "Starting Gunicorn..."
-        exec gunicorn config.wsgi -b 0.0.0.0:8080 --workers 2 --timeout 120  # Use 'exec' to replace bash, ensuring signals are handled
+        exec gunicorn config.wsgi -b 0.0.0.0:8080 --workers 2 --timeout 120  
 
     depends_on:
       db:
@@ -64,7 +64,7 @@ services:
     build:
       context: .
     volumes:
-      - .:/app/PythonProject  # Изменено: синхронизировано с WORKDIR
+      - .:/app/PythonProject  
     environment:
       PGDB: "${POSTGRES_DB}"
       PGUSER: "${POSTGRES_USER}"
@@ -73,7 +73,7 @@ services:
       EMAIL_HOST_PASSWORD: "${EMAIL_HOST_PASSWORD}"
       CELERY_BROKER_URL: "redis://redis:6379/0"
       CELERY_RESULT_BACKEND: "redis://redis:6379/0"
-      DJANGO_SETTINGS_MODULE: "config.settings"  # Добавлено: явно указываем модуль
+      DJANGO_SETTINGS_MODULE: "config.settings"  
     command: celery -A config worker -l info -P gevent
     depends_on:
       redis:
