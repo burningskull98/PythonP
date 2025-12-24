@@ -8,6 +8,7 @@ disable=
     R1705, #Unnecessary "else"
     W1203, #Use lazy % formatting
     C0305, #Trailing newlines
+    C0303,
     C0301, #Line too long
     W0718,
     E0015,
